@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="auto">
+        <ion-input fill="outline" label="Usuario" [clearInput]="true" labelPlacement="floating" [(ngModel)]="usuario"
+          color="primary"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="auto">
+        <ion-input type="{{ sw ? 'text' : 'password' }}" fill="outline" label="Contraseña" [clearInput]="true"
+          [(ngModel)]="clave" labelPlacement="floating"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="auto">
+        <ion-button expand="block" fill="clear" shape="round" (click)="this.sw = !this.sw">
+          {{ sw ? 'Ocultar' : 'Mostrar' }} contraseña <ion-icon name="eye" slot="end"></ion-icon>
+        </ion-button>
+        <ion-button expand="block" fill="solid" shape="round" (click)="login()">
+          Ingresar
+        </ion-button>
+        <ion-button expand="block" fill="clear" [routerLink]="['/home']">
+          ¿No tienes una cuenta?
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
