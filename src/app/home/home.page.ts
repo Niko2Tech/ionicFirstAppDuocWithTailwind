@@ -7,6 +7,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  fecha: Date = new Date();
+  
   constructor() {}
+
+  mostrarFecha() {
+    console.log(this.fecha);
+  }
 
 }
