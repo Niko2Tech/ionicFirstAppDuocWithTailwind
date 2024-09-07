@@ -1,18 +1,13 @@
 <ion-content [fullscreen]="true">
-  <ion-icon src="assets/{{icono}}.svg"
-    class="absolute top-5 left-5 w-10 h-10 text-{{colorIcon}} cursor-pointer dark:text-button" (click)="cambiarThema()">
-  </ion-icon>
-  <div id="contenedor" class="flex items-center justify-center flex-col h-screen w-full bg-fondo dark:bg-dark-fondo">
-    <ion-icon src="assets/logo.svg" id="logo"></ion-icon>
-    <h1 class="text-texto dark:text-dark-texto text-2xl">Nico-codes</h1>
-    <section class="flex items-center justify-center flex-col gap-4">
-      <input type="text" placeholder="Nombre usuario"
-        class="p-5 border-2 border-gray-400 rounded-full bg-gray-300 text-black dark:bg-dark-input dark:text-dark-input-text">
-      <input type="password" placeholder="Contraseña"
-        class="p-5 border-2 border-gray-400 rounded-full bg-gray-300 text-black dark:bg-dark-input dark:text-dark-input-text">
-      <button
-        class="p-4 bg-blue-500 text-white w-full rounded-full dark:bg-dark-button dark:text-dark-button-text">Ingresar</button>
-      <p class="text-center text-texto dark:text-dark-texto">¿Olvidaste tu contraseña?</p>
-    </section>
+  <div class="flex flex-col h-screen w-full bg-light-bg-theme-2 dark:bg-dark-bg-theme-2">
+    <div class="flex justify-between items-center w-full h-28 p-4">
+      <img src="assets/img/{{logoDuoc}}.png" class="w-36" />
+      <div class="flex items-center gap-2">
+        <button
+          class="bg-ligth-text-theme-200 border-ligth-text-theme-400 text-ligth-text-theme-900 rounded-full px-4 py-2 dark:bg-dark-text-theme-800 dark:text-dark-text-theme-100 hover:dark:bg-dark-text-theme-900 hover:bg-ligth-text-theme-300 transition-colors duration-100">Ingresar</button>
+        <ion-icon src="assets/{{icono}}.svg" (click)="cambiarThema()"
+          class="cursor-pointer dark:text-dark-text-theme-100 text-ligth-text-theme-300 text-2xl"></ion-icon>
+      </div>
+    </div>
   </div>
 </ion-content>

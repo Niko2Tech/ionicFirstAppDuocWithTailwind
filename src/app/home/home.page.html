@@ -1,14 +1,2 @@
 <ion-content [fullscreen]="true">
-  <!-- Prueba de fecha con componentes material angular -->
-  <mat-form-field>
-    <mat-label>Elige tu fecha</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="fecha">
-    <mat-hint>DD/MM/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <!-- Prueba de fecha con componentes ionic -->
-  <ion-button (click)="mostrarFecha()">
-    Mostrar fecha
-  </ion-button>
 </ion-content>

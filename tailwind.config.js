@@ -8,14 +8,36 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'texto': '#848c9f',        // Color para modo claro
-        'fondo': '#454E5F',        // Color para modo claro
-        'dark-texto': '#d1d5db',   // Color para modo oscuro
-        'dark-fondo': '#1f2937',   // Color para modo oscuro
-        'dark-input': '#374151',   // Color de fondo de input en modo oscuro
-        'dark-input-text': '#e5e7eb', // Color de texto de input en modo oscuro
-        'dark-button': '#2563eb',  // Color de fondo de botón en modo oscuro
-        'dark-button-text': '#ffffff', // Color de texto de botón en modo oscuro
+        'light-bg-theme': '#ffffff',
+        'light-bg-theme-2': '#F9F9F9',
+        'ligth-text-theme': {
+        '50': '#f6f6f6',
+        '100': '#e7e7e7',
+        '200': '#d1d1d1',
+        '300': '#b0b0b0',
+        '400': '#898989',
+        '500': '#6d6d6d',
+        '600': '#5d5d5d',
+        '700': '#4f4f4f',
+        '800': '#454545',
+        '900': '#3d3d3d',
+        '950': '#262626',
+        },
+        'dark-bg-theme': '#212121',
+        'dark-bg-theme-2': '#171717',
+        'dark-text-theme': {
+        '50': '#f8f8f8',
+        '100': '#ececec',
+        '200': '#dcdcdc',
+        '300': '#bdbdbd',
+        '400': '#989898',
+        '500': '#7c7c7c',
+        '600': '#656565',
+        '700': '#525252',
+        '800': '#464646',
+        '900': '#3d3d3d',
+        '950': '#292929',
+        },
       },
     },
   },

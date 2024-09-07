@@ -6,25 +6,38 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
   styleUrls: ['./index.page.scss'],
 })
 export class IndexPage implements OnInit {
-
-  icono: string = 'oscuro';
-  colorIcon: string = 'blue-400';
+  icono: string = '';
+  logoDuoc: string = '';
+  // obtenemos el tema del sistema
+  getTheme() {
+    const html = document.querySelector('html');
+    if (html?.classList.contains('dark')) {
+      this.icono = 'claro';
+      this.logoDuoc = 'duoc_logo_blanco';
+    } else {
+      this.icono = 'oscuro';
+      this.logoDuoc = 'duoc_logo_oscuro';
+    }
+    return
+  }
 
   constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
+    this.getTheme();
     return
   }
 
   cambiarThema() {
-    if (this.icono === 'oscuro') {
-      this.icono = 'claro';
-      this.colorIcon = 'white';
-      this.renderer.addClass(document.body, 'dark');
-    } else {
+    const html = document.querySelector('html');
+    if (html?.classList.contains('dark')) {
+      html?.classList.remove('dark');
       this.icono = 'oscuro';
-      this.colorIcon = 'blue-400';
-      this.renderer.removeClass(document.body, 'dark');
+      this.logoDuoc = 'duoc_logo_oscuro';
+    } else {
+      html?.classList.add('dark');
+      this.icono = 'claro';
+      this.logoDuoc = 'duoc_logo_blanco';
     }
-  }
+  }  
 }
