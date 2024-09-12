@@ -1,0 +1,25 @@
+.blinking-cursor {
+    border-right: 2px solid #EEE6DB;
+    /* El cursor visible a la derecha */
+    white-space: nowrap;
+    /* Mantiene el texto en una sola línea */
+    overflow: hidden;
+    /* Asegura que no haya desbordamiento */
+    animation: blink-caret 0.75s step-end infinite;
+    /* Efecto de parpadeo */
+}
+
+/* Efecto de parpadeo del cursor */
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: #EEE6DB;
+    }
+
+    /* Cambia el color del cursor si lo prefieres */
+}

@@ -1,13 +1,77 @@
 <ion-content [fullscreen]="true">
-  <div class="flex flex-col h-screen w-full bg-light-bg-theme-2 dark:bg-dark-bg-theme-2">
-    <div class="flex justify-between items-center w-full h-28 p-4">
-      <img src="assets/img/{{logoDuoc}}.png" class="w-36" />
+  <main class="flex flex-col w-full bg-light-bg-theme-2 dark:bg-dark-bg-theme-2">
+    <nav
+      class="flex justify-between items-center w-full h-28 p-4 bg-transparent fixed top-0 left-0 right-0 shadow-md backdrop-blur-lg">
+      <img [src]="'assets/img/' + logoDuoc + '.png'" class="w-36" />
       <div class="flex items-center gap-2">
-        <button
+        <button (click)="navegar('/login')"
           class="bg-ligth-text-theme-200 border-ligth-text-theme-400 text-ligth-text-theme-900 rounded-full px-4 py-2 dark:bg-dark-text-theme-800 dark:text-dark-text-theme-100 hover:dark:bg-dark-text-theme-900 hover:bg-ligth-text-theme-300 transition-colors duration-100">Ingresar</button>
-        <ion-icon src="assets/{{icono}}.svg" (click)="cambiarThema()"
+        <ion-icon [src]="'assets/' + icono + '.svg'" (click)="cambiarThema()"
           class="cursor-pointer dark:text-dark-text-theme-100 text-ligth-text-theme-300 text-2xl"></ion-icon>
       </div>
-    </div>
-  </div>
+    </nav>
+
+    <section class="flex flex-col justify-center items-center w-full h-screen p-5 bg-cover"
+      [ngStyle]="{'background-image': 'url(assets/img/' + bg_fondo + '.jpg)'}">
+      <h1 class="text-ligth-text-theme-900 dark:text-dark-text-theme-100 text-2xl text-center">DuocBer</h1>
+      <p class="text-ligth-text-theme-800 dark:text-dark-text-theme-100 text-center">Viaje <span id="typewriter"
+          class="text-ligth-text-theme-900 dark:text-dark-text-theme-100 font-medium blinking-cursor">{{ displayedText
+          }}</span> con nosotros</p>
+    </section>
+    <section class="flex flex-col justify-center items-center w-full p-5">
+      <div class="flex flex-col gap-5">
+        <article class="bg-ligth-text-theme-50 dark:bg-dark-bg-theme rounded-lg shadow-md p-4 flex gap-4 items-center">
+          <div>
+            <h3 class="text-ligth-text-theme-900 dark:text-dark-text-theme-100 font-bold text-xl">Rápido</h3>
+            <p class="text-ligth-text-theme-800 dark:text-dark-text-theme-100">Viaje con nosotros y llegue rápidamente a
+              su destino.</p>
+          </div>
+          <img [src]="'assets/img/auto_uber.png'" class="w-40" />
+        </article>
+        <article class="bg-ligth-text-theme-50 dark:bg-dark-bg-theme rounded-lg shadow-md p-4 flex gap-4 items-center">
+          <div>
+            <h3 class="text-ligth-text-theme-900 dark:text-dark-text-theme-100 font-bold text-xl">Seguro</h3>
+            <p class="text-ligth-text-theme-800 dark:text-dark-text-theme-100">Nuestro servicio es seguro y confiable.
+            </p>
+          </div>
+          <img [src]="'assets/escudo.svg'" class="w-28" />
+        </article>
+        <article class="bg-ligth-text-theme-50 dark:bg-dark-bg-theme rounded-lg shadow-md p-4 flex gap-4 items-center">
+          <div>
+            <h3 class="text-ligth-text-theme-900 dark:text-dark-text-theme-100 font-bold text-xl">Económico</h3>
+            <p class="text-ligth-text-theme-800 dark:text-dark-text-theme-100">Disfrute de tarifas económicas y
+              asequibles.</p>
+          </div>
+          <img [src]="'assets/bolsa_de_dinero.svg'" class="w-28" />
+        </article>
+      </div>
+    </section>
+    <footer class="bg-ligth-text-theme-50 dark:bg-dark-bg-theme w-full py-6">
+      <div class="mx-auto flex flex-col items-center">
+        <div class="flex items-center justify-center p-4">
+          <img [src]="'assets/img/' + logoDuoc + '.png'" class="w-24 mb-3" alt="DuocBer Logo" />
+          <p class="text-ligth-text-theme-800 dark:text-dark-text-theme-100 box-border text-center">
+            DuocBer - Viaje rápido, seguro y económico.
+          </p>
+        </div>
+        <div class="flex space-x-4">
+          <a href="#"
+            class="text-ligth-text-theme-800 dark:text-dark-text-theme-100 hover:text-blue-500 transition-colors">
+            <ion-icon name="logo-facebook" class="text-2xl"></ion-icon>
+          </a>
+          <a href="#"
+            class="text-ligth-text-theme-800 dark:text-dark-text-theme-100 hover:text-blue-500 transition-colors">
+            <ion-icon name="logo-twitter" class="text-2xl"></ion-icon>
+          </a>
+          <a href="#"
+            class="text-ligth-text-theme-800 dark:text-dark-text-theme-100 hover:text-blue-500 transition-colors">
+            <ion-icon name="logo-instagram" class="text-2xl"></ion-icon>
+          </a>
+        </div>
+      </div>
+      <div class="mt-6 text-center text-ligth-text-theme-800 dark:text-dark-text-theme-100">
+        &copy; 2024 DuocBer. Todos los derechos reservados.
+      </div>
+    </footer>
+  </main>
 </ion-content>
