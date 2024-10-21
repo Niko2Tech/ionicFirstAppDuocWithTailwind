@@ -5,10 +5,10 @@
         <ion-icon name="arrow-back-outline"
             class="text-2xl absolute top-5 left-5 text-ligth-text-theme-900 dark:text-dark-text-theme-100"
             (click)="navegar('/')"></ion-icon>
-        <section class="flex flex-col justify-center items-center w-full h-screen">
+        <section class="flex flex-col justify-center items-center w-full min-h-screen">
             <article *ngIf="login" [@fadeInOutLoginRegister]
                 class="bg-ligth-text-theme-50 p-2 dark:bg-dark-bg-theme rounded-2xl shadow-md flex flex-col gap-4 items-center">
-                <img [src]="'assets/img/' + logoDuoc + '.png'" class="w-36 mb-12" />
+                <img [src]="'assets/img/' + logoDuoc + '.png'" class="w-36 mb-12 mt-4" />
                 <div class="flex flex-col w-full p-5">
                     <form class="flex flex-col mb-4 w-72">
                         <div class="relative z-0 w-full mb-12 group ">
@@ -69,11 +69,91 @@
                 </div>
             </article>
             <article *ngIf="registro" [@fadeInOutLoginRegister]
-                class="bg-ligth-text-theme-50 dark:bg-dark-bg-theme rounded-2xl shadow-md flex flex-col gap-4 items-center">
-                <img [src]="'assets/img/' + logoDuoc + '.png'" class="w-36 mb-12" />
+                class="bg-ligth-text-theme-50 dark:bg-dark-bg-theme rounded-2xl shadow-md flex flex-col gap-4 items-center mx-5 my-12">
+                <img [src]="'assets/img/' + logoDuoc + '.png'" class="w-36 mb-12 mt-4" />
                 <div class="flex flex-col w-full p-5">
                     <form class="flex flex-col mb-4 w-72">
-                        <div class="relative z-0 w-full mb-12 group ">
+                        <!-- Nombre -->
+                        <div class="relative z-0 w-full mb-10 group">
+                            <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre_res"
+                                (ngModelChange)="limpiarErrores()"
+                                class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
+                                placeholder=" " />
+                            <label for="nombre"
+                                class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                Nombre completo <span class="text-red-600">*</span>
+                            </label>
+                            <div *ngIf="nombre_res_error" [@fadeInOut]
+                                class="absolute right-0 top-[-10px] transform -translate-y-full">
+                                <div class="relative bg-red-500 text-white p-2 rounded-lg text-sm shadow-lg">
+                                    {{ nombre_res_error }}
+                                    <div
+                                        class="absolute bottom-[-10px] left-4 w-0 h-0 border-t-[10px] border-t-red-500 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Rut -->
+                        <div class="relative z-0 w-full mb-10 group">
+                            <input type="text" id="rut" name="rut" [(ngModel)]="rut_res"
+                                (ngModelChange)="limpiarYFormatearRut()"
+                                class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
+                                placeholder=" " [maxLength]="12" />
+                            <label for="rut"
+                                class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Rut
+                                <span class="text-red-600">*</span>
+                            </label>
+                            <div *ngIf="rut_res_error" [@fadeInOut]
+                                class="absolute right-0 top-[-10px] transform -translate-y-full">
+                                <div class="relative bg-red-500 text-white p-2 rounded-lg text-sm shadow-lg">
+                                    {{ rut_res_error }}
+                                    <div
+                                        class="absolute bottom-[-10px] left-4 w-0 h-0 border-t-[10px] border-t-red-500 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Telefono -->
+                        <div class="relative z-0 w-full mb-10 group">
+                            <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono_res"
+                                (ngModelChange)="limpiarErrores()"
+                                class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
+                                placeholder=" " />
+                            <label for="telefono"
+                                class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                Telefono <span class="text-red-600">*</span>
+                            </label>
+                            <div *ngIf="telefono_res_error" [@fadeInOut]
+                                class="absolute right-0 top-[-10px] transform -translate-y-full">
+                                <div class="relative bg-red-500 text-white p-2 rounded-lg text-sm shadow-lg">
+                                    {{ telefono_res_error }}
+                                    <div
+                                        class="absolute bottom-[-10px] left-4 w-0 h-0 border-t-[10px] border-t-red-500 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Direccion -->
+                        <div class="relative z-0 w-full mb-10 group">
+                            <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion_res"
+                                (ngModelChange)="limpiarErrores()"
+                                class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
+                                placeholder=" " />
+                            <label for="direccion"
+                                class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                Direccion <span class="text-red-600">*</span>
+                            </label>
+                            <div *ngIf="direccion_res_error" [@fadeInOut]
+                                class="absolute right-0 top-[-10px] transform -translate-y-full">
+                                <div class="relative bg-red-500 text-white p-2 rounded-lg text-sm shadow-lg">
+                                    {{ direccion_res_error }}
+                                    <div
+                                        class="absolute bottom-[-10px] left-4 w-0 h-0 border-t-[10px] border-t-red-500 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative z-0 w-full mb-10 group ">
                             <input type="email" id="correo_res" name="correo_res" [(ngModel)]="correo_res"
                                 (ngModelChange)="limpiarErrores()"
                                 class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
@@ -92,7 +172,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="relative z-0 w-full mb-12 group ">
+                        <div class="relative z-0 w-full mb-10 group ">
                             <input type="password" id="password_res" name="password_res" [(ngModel)]="password_res"
                                 (ngModelChange)="limpiarErrores()"
                                 class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
@@ -111,7 +191,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="relative z-0 w-full mb-12 group ">
+                        <div class="relative z-0 w-full mb-10 group ">
                             <input type="password" id="password_confirm" name="password_confirm"
                                 [(ngModel)]="password_confirm" (ngModelChange)="limpiarErrores()"
                                 class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
@@ -135,11 +215,6 @@
                             Registrar
                         </button>
                     </form>
-                    <div (click)="iniciarMicrosoft()"
-                        class="flex flex-row gap-2 text-center justify-center items-center mb-4 font-medium border-2 border-ligth-text-theme-400 dark:border-dark-text-theme-100 rounded-full px-4 pt-3">
-                        <img src="assets/microsoft.svg" class="w-8 mb-3" />
-                        <p class="text-ligth-text-theme-800 dark:text-dark-text-theme-100">Continúa con Microsoft</p>
-                    </div>
                     <div class="flex flex-col gap-1 text-center">
                         <p class="text-ligth-text-theme-800 dark:text-dark-text-theme-100">¿Tienes una cuenta?</p>
                         <button (click)="mostrarLogin()"

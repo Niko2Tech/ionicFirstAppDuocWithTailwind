@@ -4,21 +4,34 @@
             class="flex justify-between items-center w-full h-28 p-4 bg-transparent sticky top-0 left-0 right-0 shadow-md backdrop-blur-lg">
             <img [src]="'assets/img/' + logoDuoc + '.png'" class="w-36" />
             <div class="flex items-center gap-2">
-                <button
+                <button (click)="toggleMenu()"
                     class="bg-ligth-text-theme-200 border-ligth-text-theme-400 text-ligth-text-theme-900 rounded-full px-4 py-2 dark:bg-dark-text-theme-800 dark:text-dark-text-theme-100 hover:dark:bg-dark-text-theme-900 hover:bg-ligth-text-theme-300 transition-colors duration-100 flex items-center gap-2">
                     <ion-icon name="person-circle-outline" class="text-2xl"></ion-icon>
                     <span class="text-ligth-text-theme-900 dark:text-dark-text-theme-100">
-                        {{ usuario }}
+                        {{ nombreUsuario }}
                     </span>
                 </button>
+                <div *ngIf="menuVisible" [@fadeInOut]
+                    class="absolute right-8 top-20 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg rounded-lg">
+                    <ul class="py-1">
+                        <li (click)="mostrarDatos()"
+                            class="px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-black dark:text-white">
+                            Mostrar datos
+                        </li>
+                        <li (click)="cerrarSesion()"
+                            class="px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-black dark:text-white">
+                            Cerrar sesión
+                        </li>
+                    </ul>
+                </div>
                 <ion-icon [src]="'assets/' + icono + '.svg'" (click)="cambiarThema()"
                     class="cursor-pointer dark:text-dark-text-theme-100 text-ligth-text-theme-300 text-2xl"></ion-icon>
             </div>
         </nav>
-        <section class="flex flex-col items-center w-full p-5">
+        <section class="flex flex-col items-center w-full p-5 min-h-screen">
             <h2 class="text-ligth-text-theme-800 dark:text-dark-text-theme-100 text-center">Viajes disponibles</h2>
             <div class="flex justify-end items-center w-full mb-2">
-                <button (click)="abrirModal('ingresoViaje')"
+                <button (click)="modalIngresarViaje()"
                     class="bg-ligth-text-theme-100 border text-ligth-text-theme-900 rounded-full px-4 py-2 dark:bg-dark-text-theme-800 dark:text-dark-text-theme-100 hover:dark:bg-dark-text-theme-900 hover:bg-ligth-text-theme-300 transition-colors duration-100">
                     Ingresar viaje
                 </button>
@@ -33,64 +46,8 @@
 
                         <h2 class="text-xl font-bold text-ligth-text-theme-800 dark:text-dark-text-theme-100">Ingresar
                             viaje</h2>
+                        <div #map id="map" class="w-full h-96 z-50"></div>
                         <form class="flex flex-col mb-4 w-72">
-                            <div class="relative z-0 w-full mb-5 group">
-                                <input type="text" id="usuario" name="usuario" [(ngModel)]="usuario" readonly
-                                    class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
-                                    placeholder=" " />
-                                <label for="usuario"
-                                    class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                    Usuario <span class="text-red-600">*</span>
-                                </label>
-                            </div>
-                            <div class="relative z-0 w-full mb-5 group">
-                                <input type="text" id="carrera" name="carrera" [(ngModel)]="carrera_por_defecto"
-                                    readonly
-                                    class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
-                                    placeholder=" " />
-                                <label for="carrera"
-                                    class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                    Carrera <span class="text-red-600">*</span>
-                                </label>
-                            </div>
-                            <div class="relative z-0 w-full mb-5 group">
-                                <input type="text" id="destino" name="destino" [(ngModel)]="destino"
-                                    class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
-                                    placeholder=" " />
-                                <label for="destino"
-                                    class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                    Destino <span class="text-red-600">*</span>
-                                </label>
-                            </div>
-                            <div class="relative z-0 w-full mb-5 group">
-                                <input type="number" id="valor" name="valor" [(ngModel)]="valor"
-                                    class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
-                                    placeholder=" " />
-                                <label for="valor"
-                                    class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                    Valor del viaje <span class="text-red-600">*</span>
-                                </label>
-                            </div>
-                            <div class="relative z-0 w-full mb-5 group">
-                                <input type="number" id="asientosDisponibles" name="asientosDisponibles"
-                                    [(ngModel)]="asientosDisponibles"
-                                    class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
-                                    placeholder=" " />
-                                <label for="asientosDisponibles"
-                                    class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                    Asientos disponibles <span class="text-red-600">*</span>
-                                </label>
-                            </div>
-                            <div class="relative z-0 w-full mb-5 group">
-                                <input type="number" id="asientosTotales" name="asientosTotales"
-                                    [(ngModel)]="asientosTotales"
-                                    class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-outrageous-orange-400 peer dark:text-light-bg-theme-2"
-                                    placeholder=" " />
-                                <label for="asientosTotales"
-                                    class="absolute text-base text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-outrageous-orange-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                    Asientos totales <span class="text-red-600">*</span>
-                                </label>
-                            </div>
                             <div class="flex justify-end gap-1">
                                 <button type="submit" (click)="agregarViaje()"
                                     class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-600">
@@ -104,8 +61,75 @@
                         </form>
                     </div>
                 </div>
+                <div *ngIf="modalAbierto === 'mostrarDatos' && usuario"
+                    class="fixed inset-0 flex items-center justify-center z-50">
+                    <div class="fixed inset-0 bg-black bg-opacity-50" (click)="cerrarModal()"></div>
+
+                    <div [ngClass]="animateClass"
+                        class="bg-white dark:bg-dark-bg-theme rounded-lg shadow-lg w-96 max-w-full p-6 relative z-10 flex flex-col gap-4 items-center">
+
+                        <ion-icon name="close-outline"
+                            class="absolute top-4 right-4 text-2xl cursor-pointer text-dark-bg-theme dark:text-dark-text-theme-100"
+                            (click)="cerrarModal()"></ion-icon>
+
+                        <h2 class="text-xl font-bold text-ligth-text-theme-800 dark:text-dark-text-theme-100">Mis Datos
+                        </h2>
+
+                        <!-- Mostrar datos del usuario solo si existen -->
+                        <div class="w-full text-black dark:text-white" *ngIf="usuario">
+                            <p class="text-sm">
+                                <span class="font-medium">Correo:</span> {{ usuario.correo }}
+                            </p>
+                            <p class="text-sm">
+                                <span class="font-medium">Nombre:</span> {{ usuario.nombre }}
+                            </p>
+                            <p class="text-sm">
+                                <span class="font-medium">Dirección:</span> {{ usuario.direccion }}
+                            </p>
+                            <p class="text-sm">
+                                <span class="font-medium">RUT:</span> {{ usuario.rut }}
+                            </p>
+                            <p class="text-sm">
+                                <span class="font-medium">Teléfono:</span> {{ usuario.telefono }}
+                            </p>
+                        </div>
+
+                        <!-- Mostrar los viajes -->
+                        <div class="w-full text-black dark:text-white">
+                            <h3 class="text-lg font-semibold mt-4 mb-2 text-ligth-text-theme-800 dark:text-gray-200">Mis
+                                Viajes</h3>
+                            <ul *ngIf="usuario.viajes_creados.length > 0; else sinViajes">
+                                <li *ngFor="let viaje of usuario.viajes_creados"
+                                    class="mb-2 p-2 border rounded-lg dark:border-gray-700">
+                                    <p>
+                                        <span class="font-medium">Día:</span> {{ viaje.fecha }}
+                                    </p>
+                                    <p>
+                                        <span class="font-medium">Ganado:</span> {{ viaje.valor *
+                                        viaje.asientosOcupados }} CLP
+                                    </p>
+                                </li>
+                            </ul>
+                            <ng-template #sinViajes>
+                                <p>No hay viajes creados.</p>
+                            </ng-template>
+                        </div>
+                        <!-- Botones del modal -->
+                        <div class="flex justify-end gap-2 w-full mt-4">
+                            <button (click)="cerrarModal()"
+                                class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600">
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <article class="flex flex-col gap-5 items-center">
+                <div *ngIf="viajes.length === 0">
+                    <p class="text-ligth-text-theme-800 dark:text-dark-text-theme-100 mt-4">No hay viajes disponibles
+                    </p>
+                </div>
+                <div #map id="map" class="w-full h-96 z-50"></div>
                 <div *ngFor="let viaje of viajes"
                     class="flex justify-between items-center bg-light-text-theme-50 dark:bg-dark-bg-theme rounded-lg shadow-md p-4 gap-4 w-full max-w-[400px]">
                     <div class="flex flex-col gap-1 w-1/2">
