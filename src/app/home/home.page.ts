@@ -1,6 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { environment } from '../../environments/environment';
 
 declare var google: any;
 
@@ -71,7 +72,7 @@ export class HomePage implements OnInit {
   public directionsService: any;
   public directionsDisplay: any;
   public start: any = "Duoc UC: Sede Melipilla - Serrano, Melipilla, Chile";
-  public end: any = "Pomaire";
+  public end: any = "";
   public autocompleteItems: any[] = [];
   distancia: string = '';
   duracion: string = '';
@@ -82,6 +83,10 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.getTheme();
     this.getSeccion();
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?libraries=places&key=${environment.googleMapsApiKey}`;
+    script.async = true;
+    document.body.appendChild(script);
   }
 
   getSeccion() {
@@ -116,6 +121,7 @@ export class HomePage implements OnInit {
       console.error('Usuario no encontrado en la base de datos de users');
     }
     this.nombreUsuario = this.usuario?.correo?.split('@')[0] || 'Usuario no identificado';
+    this.end = this.usuario?.direccion || '';
   }
 
   initMap() {
